@@ -6,8 +6,10 @@ import time
 # open Chrome
 driver = webdriver.Chrome('C:\webdrivers\chromedriver.exe')
 
-# Open URL
-driver.get('https://docs.google.com/forms/d/e/1FAIpQLSebKVsxe_9IznQ7p-VhoN5LajcsrIK31aJIzM23HYWba70D6Q/viewform')
+# Open URL 
+url = '' #Just Paste Google Form link here
+driver.get(url)
+
 
 # Enter Details:
 print("\n****Enter Details****\n")
@@ -40,35 +42,34 @@ long_ans = driver.find_elements(By.CLASS_NAME,'exportTextarea')
 no_of_long_ans = len(long_ans)
 print("No. of Long Answer Type Question: ",no_of_long_ans)
 
-# No. of Drop Downs
-dropdown = driver.find_elements(By.CLASS_NAME,'exportDropDown')
-no_of_dropdown = len(dropdown)
-print("No. of Drop Downs: ",no_of_dropdown)
-
 
 
 # Enter Answers
 print("\n****Enter Answers of Questions****\n")
 answers = []
 
+# Short Answer
 ans_short_ans_list = []
 for i in range(no_of_short_ans):
     ans_short_ans = input(f"For Short Answer {i+1}: ")
     ans_short_ans_list.append(ans_short_ans)
 answers.append(ans_short_ans_list)
 
+# Long Answer
 ans_long_ans_list = []
 for i in range(no_of_long_ans):
     ans_long_ans = input(f"For Long Answer {i+1}: ")
     ans_long_ans_list.append(ans_long_ans)
 answers.append(ans_long_ans_list)
 
+# Multiple Choice
 ans_mul_list =[]
 for i in range(no_of_mul_choice):
     ans_mul = int(input(f"For Multiple Choice {i + 1}, Enter Option number as Answer: "))
     ans_mul_list.append(ans_mul-1)
 answers.append(ans_mul_list)
 
+# Checkbox
 ans_checkbox_list = []
 no_of_checks = []
 for i in range(no_of_checkbox):
@@ -129,12 +130,12 @@ count+=1
 
 time.sleep(5)
 # click on submit button
-# submit = driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div/div/span/span')
-# submit.click()
-#
+submit = driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div/div/span/span')
+submit.click()
+
 # # fill another response
 # another_response = driver.find_element_by_xpath('/html/body/div[1]/div[2]/div[1]/div/div[4]/a')
 # another_response.click()
 
 # close the window
-# driver.close()
+driver.close()
